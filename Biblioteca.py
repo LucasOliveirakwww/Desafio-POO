@@ -6,7 +6,7 @@ Menu:
 4- Sair
 """
 class Agenda:
-    def _init_(self):
+    def __init__(self):
         self.tarefas = []
 
     def listarTarefas(self):
@@ -23,25 +23,19 @@ class Agenda:
     def adicionarTarefa(self):
         novaTarefa = input("Insira a tarefa: ")
         self.tarefas.append (novaTarefa)
-        print("Tarefa cadastrada com sucesso!")
+        print("Tarefa cadastrada!")
 
     def removerTarefa(self):
         self.listarTarefas()
-        posicao = int(input("Insira a posição da tarefa que deseja remover: "))
-
-        if posicao != "" and posicao [0] in "123456789":
-            j = int(posicao) - 1
-            if j < len(self.tarefas):
-                tarefaRemovida = self.tarefas.pop(j)
-                print(f"Tarefa: {tarefaRemovida} removida com sucesso! ")
-
+        try:
+            posicao = int(input("Insira a posição da tarefa que deseja remover: "))
+            if 1 <= posicao <= len(self.tarefas):
+                tarefaRemovida = self.tarefas.pop(posicao - 1)
+                print(f"Tarefa: '{tarefaRemovida}' removida!")
             else:
-                print("Posição fora do alcance: ")
-
-        else:
-            print("Entrada Invalida! Insira um numero inteiro positivo")
-
-
+                print("Posição fora do alcance.")
+        except ValueError:
+            print("Entrada inválida! Insira um número inteiro.")
 
     def menu(self):
         while True:
